@@ -1,0 +1,9 @@
+c:\users\sojeb\documents\visual studio 2013\Projects\bihongoCode\bihongoCode\bin\Debug\bihongoCode.exe.config
+c:\users\sojeb\documents\visual studio 2013\Projects\bihongoCode\bihongoCode\bin\Debug\bihongoCode.exe
+c:\users\sojeb\documents\visual studio 2013\Projects\bihongoCode\bihongoCode\bin\Debug\bihongoCode.pdb
+c:\users\sojeb\documents\visual studio 2013\Projects\bihongoCode\bihongoCode\obj\Debug\bihongoCode.csprojResolveAssemblyReference.cache
+c:\users\sojeb\documents\visual studio 2013\Projects\bihongoCode\bihongoCode\obj\Debug\bihongoCode.Properties.Resources.resources
+c:\users\sojeb\documents\visual studio 2013\Projects\bihongoCode\bihongoCode\obj\Debug\bihongoCode.csproj.GenerateResource.Cache
+c:\users\sojeb\documents\visual studio 2013\Projects\bihongoCode\bihongoCode\obj\Debug\bihongoCode.exe
+c:\users\sojeb\documents\visual studio 2013\Projects\bihongoCode\bihongoCode\obj\Debug\bihongoCode.pdb
+c:\users\sojeb\documents\visual studio 2013\Projects\bihongoCode\bihongoCode\obj\Debug\bihongoCode.Form1.resources

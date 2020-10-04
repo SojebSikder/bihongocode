@@ -1,0 +1,4 @@
+E:\My Program\C#\bihongoCode\bihongoPlugin\bin\Debug\bihongoPlugin.pdb
+E:\My Program\C#\bihongoCode\bihongoPlugin\obj\Debug\bihongoPlugin.dll
+E:\My Program\C#\bihongoCode\bihongoPlugin\obj\Debug\bihongoPlugin.pdb
+E:\My Program\C#\bihongoCode\bihongoPlugin\obj\Debug\bihongoPlugin.csprojResolveAssemblyReference.cache

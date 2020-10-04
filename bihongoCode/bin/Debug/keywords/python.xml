@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Keywords> 
+<Keyword>new</Keyword> 
+<Keyword>class</Keyword> 
+<Keyword>extend</Keyword> 
+<Keyword>implement</Keyword> 
+<Keyword>if</Keyword> 
+<Keyword>else</Keyword> 
+<Keyword>foreach</Keyword> 
+<Keyword>while</Keyword> 
+<Keyword>do</Keyword> 
+<Keyword>return</Keyword> 
+<Keyword>try</Keyword> 
+<Keyword>catch</Keyword> 
+<Keyword>true</Keyword> 
+<Keyword>false</Keyword> 
+<Keyword>def</Keyword> 
+</Keywords>

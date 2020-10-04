@@ -1,0 +1,7 @@
+E:\My Program\C#\bihongoCode\python\bin\Debug\python.dll
+E:\My Program\C#\bihongoCode\python\bin\Debug\python.pdb
+E:\My Program\C#\bihongoCode\python\bin\Debug\bihongoPlugin.dll
+E:\My Program\C#\bihongoCode\python\bin\Debug\bihongoPlugin.pdb
+E:\My Program\C#\bihongoCode\python\obj\Debug\python.csprojResolveAssemblyReference.cache
+E:\My Program\C#\bihongoCode\python\obj\Debug\python.dll
+E:\My Program\C#\bihongoCode\python\obj\Debug\python.pdb
