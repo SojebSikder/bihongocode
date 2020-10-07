@@ -115,7 +115,7 @@
             this.menuStrip.Location = new System.Drawing.Point(0, 0);
             this.menuStrip.Name = "menuStrip";
             this.menuStrip.Size = new System.Drawing.Size(771, 27);
-            this.menuStrip.TabIndex = 2;
+            this.menuStrip.TabIndex = 1;
             this.menuStrip.Text = "menuStrip1";
             // 
             // fileToolStripMenuItem
@@ -497,8 +497,8 @@
             this.tabControl1.Location = new System.Drawing.Point(-1, 0);
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
-            this.tabControl1.Size = new System.Drawing.Size(633, 496);
-            this.tabControl1.TabIndex = 0;
+            this.tabControl1.Size = new System.Drawing.Size(629, 496);
+            this.tabControl1.TabIndex = 1;
             // 
             // contextTabHeader
             // 
@@ -535,7 +535,7 @@
             this.LineNumberTextBox.Name = "LineNumberTextBox";
             this.LineNumberTextBox.ReadOnly = true;
             this.LineNumberTextBox.Size = new System.Drawing.Size(35, 449);
-            this.LineNumberTextBox.TabIndex = 1;
+            this.LineNumberTextBox.TabIndex = 0;
             this.LineNumberTextBox.Text = "";
             this.LineNumberTextBox.Visible = false;
             this.LineNumberTextBox.MouseDown += new System.Windows.Forms.MouseEventHandler(this.LineNumberTextBox_MouseDown);
@@ -628,7 +628,7 @@
             this.toolStrip1.Name = "toolStrip1";
             this.toolStrip1.RenderMode = System.Windows.Forms.ToolStripRenderMode.System;
             this.toolStrip1.Size = new System.Drawing.Size(771, 25);
-            this.toolStrip1.TabIndex = 5;
+            this.toolStrip1.TabIndex = 2;
             this.toolStrip1.Text = "toolStrip1";
             // 
             // Form1

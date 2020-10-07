@@ -37,6 +37,7 @@ namespace bihongoCode
         public string pluginName;
 
         string paths = Environment.GetFolderPath(Environment.SpecialFolder.Desktop);
+        bool isArg = false;
         #endregion
 
         #region function
@@ -423,11 +424,28 @@ namespace bihongoCode
             LoadPlugin();
         }
 
+        public void LoadFile(string openWith)
+        {
+            FileAddress = openWith;
+            string strfilename = openWith;
+            FileInfo fileInfo = new FileInfo(strfilename);
+            FileExtension = fileInfo.Extension;
+
+            newpage(fileInfo.Name);
+            changeExt(FileExtension);
+            string filetext = File.ReadAllText(strfilename);
+            GetRichTextBox().Text = filetext;
+
+            isArg = true;
+        }
 
         private void Form1_Load(object sender, EventArgs e)
         {
             //Create new tabpage with richtextbox
-            newpage();
+            if(isArg == false){
+                newpage();
+            }
+            
             //GetRichTextBox().keywordUrl = "\\keywords\\c_sharp.xml";
             GetRichTextBox().Focus();
 

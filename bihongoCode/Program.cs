@@ -16,7 +16,20 @@ namespace bihongoCode
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new Form1());
+
+            var mainForm = new Form1();
+
+            // Add these lines:
+            // ----------------------------------------------
+            string[] args = Environment.GetCommandLineArgs();
+            if (args.Count() >= 2)
+            {
+                mainForm.LoadFile(args[1]);
+            }
+                
+            // ----------------------------------------------
+
+            Application.Run(mainForm);
         }
     }
 }
