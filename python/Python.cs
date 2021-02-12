@@ -45,6 +45,7 @@ namespace python
         {
             tes = "Hello i am working";
             //MessageBox.Show("Initiated... "+tes);
+            MessageBox.Show("Hello from python plugin");
         }
         //this is start when plugin will clicked
         public void Start()

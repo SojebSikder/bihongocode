@@ -36,6 +36,9 @@ namespace bihongoCode.library
             }
         }
 
+        /**
+         * Get Plugin list
+         */
         public static ICollection<StandardIO> PluginList()
         {
             _StandardIOPlugins = new Dictionary<string, StandardIO>();
@@ -44,6 +47,9 @@ namespace bihongoCode.library
         }
 
 
+        /**
+         * Get plugin property by key and return version
+         */
         public static dynamic getPlugin_PropertyByKey(string key, string plugin_property)
         {
             dynamic version = null;

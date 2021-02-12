@@ -148,6 +148,8 @@ namespace bihongoCode
                 foreach (var t in assembly.GetTypes())
                 {
                     pluginName = t.Name;
+
+
                     InitPlugin();
                 }
             }
@@ -438,6 +440,7 @@ namespace bihongoCode
             InitializeComponent();
             //load plugin
             LoadPlugin();
+            //loadInit();
         }
 
         public void LoadFile(string openWith)

@@ -18,9 +18,40 @@ namespace HTML
         //Get Editor file extension
         public string FileExtension { get; set; }
 
+        // Define plugin_id
+        public string plugin_id
+        {
+            get
+            {
+                return "html";
+            }
+        }
         public string Name
         {
-            get { return "Html"; }
+            get { return "HTML"; }
+        }
+        // Define plugin version
+        public string Version
+        {
+            get
+            {
+                return "1.0";
+            }
+        }
+
+        // Defin plugin description
+        public string Description
+        {
+            get
+            {
+                return "Html Viewer";
+            }
+        }
+
+        //This method will be start first
+        public void Init()
+        {
+            MessageBox.Show("Initiated... ");
         }
 
         public void Start()
