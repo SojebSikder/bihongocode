@@ -152,11 +152,43 @@ namespace bihongoCode
                 {
                     pluginName = t.Name;
 
-
+                    //SetKeyWithExt();
                     InitPlugin();
+                    if(PluginUtility._StandardIOPlugins.ContainsKey(pluginName))
+                    {
+                        StandardIO item = PluginUtility._StandardIOPlugins[pluginName];
+                        if(PluginUtility.getPlugin_Property(item, "SetExt") != null){
+                            MessageBox.Show(PluginUtility.getPlugin_Property(item, "SetExt"));
+                        }
+                        
+                        
+                    }
+                    
+                   
                 }
             }
             //ending
+        }
+
+        public void SetKeyWithExt()
+        {
+
+            string dkey = pluginName;
+            if (PluginUtility._StandardIOPlugins.ContainsKey(dkey))
+            {
+
+                StandardIO dplugin = PluginUtility._StandardIOPlugins[dkey];
+                //dplugin.Start();
+
+                dynamic devType = dplugin.GetType();
+                dynamic dev = Activator.CreateInstance(devType);
+
+
+                dynamic methodStart = devType.GetMethod("Test");
+                methodStart.Invoke(dev, new object[] { });
+
+                //MessageBox.Show(eventval);
+            }
         }
         /// <summary>
         /// Invoke plugin initPlugin Method
