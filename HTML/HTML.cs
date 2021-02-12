@@ -18,14 +18,7 @@ namespace HTML
         //Get Editor file extension
         public string FileExtension { get; set; }
 
-        // Define plugin_id
-        public string plugin_id
-        {
-            get
-            {
-                return "html";
-            }
-        }
+
         public string Name
         {
             get { return "HTML"; }
@@ -46,6 +39,12 @@ namespace HTML
             {
                 return "Html Viewer";
             }
+        }
+
+        public void SetKeywordByExt()
+        {
+            var data = new Dictionary<String,String>();
+            data.Add(".py", "\\keywords\\python.xml");
         }
 
         //This method will be start first

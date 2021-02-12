@@ -36,6 +36,9 @@ namespace bihongoCode
         public string FileExtension = ".txt";
         public string pluginName;
 
+        // Add set of extension with keywords
+        public Dictionary<String, String> KeywordWithExt = new Dictionary<String, String>();
+
         string paths = Environment.GetFolderPath(Environment.SpecialFolder.Desktop);
         bool isArg = false;
 
@@ -508,6 +511,13 @@ namespace bihongoCode
 
             //invoke plugin init method
             loadInit();
+
+            // Add extension with keywords
+            KeywordWithExt.Add(".php", "\\keywords\\php.xml");
+            KeywordWithExt.Add(".cs", "\\keywords\\cs.xml");
+            KeywordWithExt.Add(".html", "\\keywords\\html.xml");
+            KeywordWithExt.Add(".js", "\\keywords\\js.xml");
+            KeywordWithExt.Add(".py", "\\keywords\\py.xml");
         }
 
 
@@ -641,7 +651,20 @@ namespace bihongoCode
 
             if (c != null)
             {
-                GetRichTextBox().keywordUrl = "\\keywords\\" + c.Text;
+                string input = c.Text;
+                int index = input.IndexOf(".xml");
+                if (index > 0)
+                {
+                    input = input.Substring(0, index);
+                }
+
+                input = input.Insert(0, ".");
+
+                if (KeywordWithExt.ContainsKey(input))
+                {
+                    GetRichTextBox().keywordUrl = KeywordWithExt[input].ToString();
+                }
+                
             }
 
         }
@@ -652,9 +675,16 @@ namespace bihongoCode
             newpage();
         }
 
+        // Change file extension with keywords
         public void changeExt(string ext)
         {
-            if (ext == ".php")
+
+            if(KeywordWithExt.ContainsKey(ext)){
+                GetRichTextBox().keywordUrl = KeywordWithExt[ext].ToString();
+            }
+
+            
+         /*   if (ext == ".php")
             {
                 GetRichTextBox().keywordUrl = "\\keywords\\php.xml";
             }
@@ -673,7 +703,9 @@ namespace bihongoCode
             else if (ext == ".py")
             {
                 GetRichTextBox().keywordUrl = "\\keywords\\python.xml";
-            }
+            } 
+          * */
+
         }
 
         private void openToolStripMenuItem_Click(object sender, EventArgs e)
