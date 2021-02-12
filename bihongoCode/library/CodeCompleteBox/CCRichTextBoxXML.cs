@@ -233,7 +233,7 @@ namespace CodeCompletion_CSharp
             List<String> classlist = new List<String> { };
             List<String> datatypelist = new List<String> { };
 
-            using (XmlReader reader = XmlReader.Create(Application.StartupPath + keywordUrl))
+            using (XmlReader reader = XmlReader.Create(Application.StartupPath + "\\keywords\\"+keywordUrl))
             {
                 while (reader.Read())
                 {

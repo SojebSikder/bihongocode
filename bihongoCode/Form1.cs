@@ -513,11 +513,11 @@ namespace bihongoCode
             loadInit();
 
             // Add extension with keywords
-            KeywordWithExt.Add(".php", "\\keywords\\php.xml");
-            KeywordWithExt.Add(".cs", "\\keywords\\cs.xml");
-            KeywordWithExt.Add(".html", "\\keywords\\html.xml");
-            KeywordWithExt.Add(".js", "\\keywords\\js.xml");
-            KeywordWithExt.Add(".py", "\\keywords\\py.xml");
+            KeywordWithExt.Add(".php", "php.xml");
+            KeywordWithExt.Add(".cs", "cs.xml");
+            KeywordWithExt.Add(".html", "html.xml");
+            KeywordWithExt.Add(".js", "js.xml");
+            KeywordWithExt.Add(".py", "py.xml");
         }
 
 
