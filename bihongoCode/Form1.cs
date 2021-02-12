@@ -158,7 +158,8 @@ namespace bihongoCode
                     {
                         StandardIO item = PluginUtility._StandardIOPlugins[pluginName];
                         if(PluginUtility.getPlugin_Property(item, "SetExt") != null){
-                            MessageBox.Show(PluginUtility.getPlugin_Property(item, "SetExt"));
+                            var ext = PluginUtility.getPlugin_Property(item, "SetExt");
+                            MessageBox.Show(ext);
                         }
                         
                         

@@ -7,7 +7,13 @@ c:\users\sojeb\documents\visual studio 2013\Projects\bihongoCode\bihongoCode\obj
 c:\users\sojeb\documents\visual studio 2013\Projects\bihongoCode\bihongoCode\obj\Debug\bihongoCode.exe
 c:\users\sojeb\documents\visual studio 2013\Projects\bihongoCode\bihongoCode\obj\Debug\bihongoCode.pdb
 c:\users\sojeb\documents\visual studio 2013\Projects\bihongoCode\bihongoCode\obj\Debug\bihongoCode.Form1.resources
-E:\My Program\C#\bihongocode\bihongoCode\obj\Debug\bihongoCode.exe
+E:\My Program\C#\bihongocode\bihongoCode\bin\Debug\bihongoCode.exe.config
+E:\My Program\C#\bihongocode\bihongoCode\bin\Debug\bihongoCode.exe.manifest
+E:\My Program\C#\bihongocode\bihongoCode\bin\Debug\bihongoCode.application
+E:\My Program\C#\bihongocode\bihongoCode\bin\Debug\bihongoCode.exe
+E:\My Program\C#\bihongocode\bihongoCode\bin\Debug\bihongoCode.pdb
+E:\My Program\C#\bihongocode\bihongoCode\bin\Debug\bihongoPlugin.dll
+E:\My Program\C#\bihongocode\bihongoCode\bin\Debug\bihongoPlugin.pdb
 E:\My Program\C#\bihongocode\bihongoCode\obj\Debug\bihongoCode.csprojResolveAssemblyReference.cache
 E:\My Program\C#\bihongocode\bihongoCode\obj\Debug\bihongoCode.About.resources
 E:\My Program\C#\bihongocode\bihongoCode\obj\Debug\bihongoCode.cmd.resources
@@ -18,13 +24,7 @@ E:\My Program\C#\bihongocode\bihongoCode\obj\Debug\bihongoCode.PluginListForm.re
 E:\My Program\C#\bihongocode\bihongoCode\obj\Debug\bihongoCode.Properties.Resources.resources
 E:\My Program\C#\bihongocode\bihongoCode\obj\Debug\bihongoCode.Replcae.resources
 E:\My Program\C#\bihongocode\bihongoCode\obj\Debug\bihongoCode.csproj.GenerateResource.Cache
-E:\My Program\C#\bihongocode\bihongoCode\obj\Debug\bihongoCode.pdb
-E:\My Program\C#\bihongocode\bihongoCode\bin\Debug\bihongoCode.exe.config
-E:\My Program\C#\bihongocode\bihongoCode\bin\Debug\bihongoCode.exe.manifest
-E:\My Program\C#\bihongocode\bihongoCode\bin\Debug\bihongoCode.application
-E:\My Program\C#\bihongocode\bihongoCode\bin\Debug\bihongoCode.exe
-E:\My Program\C#\bihongocode\bihongoCode\bin\Debug\bihongoCode.pdb
-E:\My Program\C#\bihongocode\bihongoCode\bin\Debug\bihongoPlugin.dll
-E:\My Program\C#\bihongocode\bihongoCode\bin\Debug\bihongoPlugin.pdb
 E:\My Program\C#\bihongocode\bihongoCode\obj\Debug\bihongoCode.exe.manifest
 E:\My Program\C#\bihongocode\bihongoCode\obj\Debug\bihongoCode.application
+E:\My Program\C#\bihongocode\bihongoCode\obj\Debug\bihongoCode.exe
+E:\My Program\C#\bihongocode\bihongoCode\obj\Debug\bihongoCode.pdb

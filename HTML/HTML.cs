@@ -17,6 +17,7 @@ namespace HTML
         public string FileAddress { get; set; }
         //Get Editor file extension
         public string FileExtension { get; set; }
+        
 
 
         public string Name
@@ -41,16 +42,20 @@ namespace HTML
             }
         }
 
-        public void SetKeywordByExt()
+        public string SetExt
         {
-            var data = new Dictionary<String,String>();
-            data.Add(".py", "\\keywords\\python.xml");
+            get
+            {
+                return ".css@css.xml|.jsx@jsx.xml";
+            }
         }
+
 
         //This method will be start first
         public void Init()
         {
-            MessageBox.Show("Initiated... ");
+           /* SetExt.Add(".css", "css.xml");
+            SetExt.Add(".jsx", "jsx.xml"); */
         }
 
         public void Start()
