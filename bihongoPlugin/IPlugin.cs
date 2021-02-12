@@ -8,55 +8,69 @@ namespace bihongoPlugin
 {
     public enum MenuPosition {
 
-        // Summary:
-        //     The control appears on File menu.
+        /// <summary>
+        /// The control appears on File menu.
+        /// </summary>
         File,
-        // Summary:
-        //     The control appears on Edit menu.
-        Edit,
-        // Summary:
-        //     The control appears on Format menu.
+        /// <summary>
+        /// The control appears on Edit menu.
+        /// </summary>
+        Edit,  
+        /// <summary>
+        /// The control appears on Format menu.
+        /// </summary>
         Format,
-        // Summary:
-        //     The control appears on Developer menu.
-        Developer,
-        // Summary:
-        //     The control appears on Tools menu.
+        /// <summary>
+        /// The control appears on Developer menu.
+        /// </summary>
+        Developer,  
+        /// <summary>
+        /// The control appears on Tools menu.
+        /// </summary>
         Tools,
-        // Summary:
-        //     The control appears on Plugins menu.
+        /// <summary>
+        /// The control appears on Plugins menu.
+        /// </summary>
         Plugins,
-        // Summary:
-        //     The control appears on Settings menu.
-        Settings,
-        // Summary:
-        //     The control appears on Help menu.
-        Help,
-        // Summary:
-        //     The control appears on Toolbar.
+        /// <summary>
+        /// The control appears on Settings menu.
+        /// </summary>
+        Settings,   
+        /// <summary>
+        /// The control appears on Help menu.
+        /// </summary>
+        Help, 
+        /// <summary>
+        /// The control appears on Toolbar.
+        /// </summary>
         Toolbar 
     }
     public enum ContextMenuPosition {
-        // Summary:
-        //     The control appears on context menu.
+        /// <summary>
+        /// The control appears on context menu.
+        /// </summary>
         Context_Menu 
     }
     public enum PanelPosition {
-        // Summary:
-        //     The control appears on panel.
+        /// <summary>
+        /// The control appears on panel.
+        /// </summary>
         Bottom_Panel 
     }
 
     public interface StandardIO
-    {
-        // Summary:
-        //     This define name of plugins.
-        string Name { get; }
-        // Summary:
-        //     This define position of plugins.
+    { 
+        /// <summary>
+        /// This define name of plugins.
+        /// </summary>
+        string Name { get; }  
+        /// <summary>
+        /// This define position of plugins.
+        /// </summary>
         string[] position { get; }
-        // Summary:
-        //     This is entry point.
+        /// <summary>
+        /// This is entry point.
+        /// </summary>
         void Start();
     }
 

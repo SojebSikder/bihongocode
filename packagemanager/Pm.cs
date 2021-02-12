@@ -15,6 +15,9 @@ namespace packagemanager
 {
     public class Pm : StandardIO
     {
+        //Get Editor File address where file have been saved
+        public string FileAddress { get; set; }
+
         private TextBox txtInput;
         private Button btnExe;
         private Label label1;
@@ -110,30 +113,32 @@ namespace packagemanager
 
         private void btnExe_Click(object sender, EventArgs e)
         {
-            if (File.Exists("lib\\bihongocmd\\phpcmd.exe"))
-            {
-                Process.Start("lib\\bihongocmd\\phpcmd.exe", txtInput.Text);
-                txtInput.Text = "";
-            }
-            else
-            {
-                MessageBox.Show("Package Manager not found :)");
-            }
+            runCommand();
+
+            MessageBox.Show(FileAddress + "\\");
         }
+
+        
 
         private void txtInput_KeyUp(object sender, KeyEventArgs e)
         {
             if (e.KeyCode == Keys.Enter)
             {
-                if (File.Exists("lib\\bihongocmd\\phpcmd.exe"))
-                {
-                    Process.Start("lib\\bihongocmd\\phpcmd.exe", txtInput.Text);
-                    txtInput.Text = "";
-                }
-                else
-                {
-                    MessageBox.Show("Package Manager not found :)");
-                }
+                runCommand();
+
+            }
+        }
+
+        public void runCommand()
+        {
+            if (File.Exists("lib\\bihongocmd\\phpcmd.exe"))
+            {
+                Process.Start("lib\\bihongocmd\\phpcmd.exe", FileAddress+"\\"+txtInput.Text);
+                txtInput.Text = "";
+            }
+            else
+            {
+                MessageBox.Show("Package Manager not found :)");
             }
         }
 

@@ -16,6 +16,8 @@ using SimplePlugin;
 using System.Diagnostics;
 using System.Threading;
 using System.Reflection;
+using bihongoCode.library;
+
 
 namespace bihongoCode
 {
@@ -23,8 +25,6 @@ namespace bihongoCode
     {
 
         #region variables
-        //init plugins variable
-        Dictionary<string, StandardIO> _StandardIOPlugins;
 
         Color backColor = Color.FromArgb(40, 41, 35); //#282923 //0, 64, 128
         Color foreColor = Color.White;
@@ -33,33 +33,51 @@ namespace bihongoCode
         System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
         //File Info
         public string FileAddress;
-        public string FileExtension=".txt";
+        public string FileExtension = ".txt";
         public string pluginName;
 
         string paths = Environment.GetFolderPath(Environment.SpecialFolder.Desktop);
         bool isArg = false;
+
+        /// <summary>
+        /// Plugin event component
+        /// </summary>
+        public enum PluginComponent
+        {   
+            /// <summary>
+            /// Used for toolstrip
+            /// </summary>
+            ToolStripButton,
+            /// <summary>
+            /// Used for tollsript item
+            /// </summary>
+            ToolStripMenuItem
+        }
         #endregion
 
         #region function
 
-        //Load all plugins
+        /// <summary>
+        /// Load all plugins
+        /// </summary>
         public void LoadPlugin()
         {
             //.....................Plugin..........System..........Code...........
-            _StandardIOPlugins = new Dictionary<string, StandardIO>();
-            ICollection<StandardIO> StandardIOPlugins = PluginLoader.LoadDevPlugins("Plugins");
+            //_StandardIOPlugins = new Dictionary<string, StandardIO>();
+            //ICollection<StandardIO> StandardIOPlugins = PluginLoader.LoadDevPlugins("Plugins");
+
 
             int btnPosition = 400;
-            foreach (var item in StandardIOPlugins)
+            foreach (var item in PluginUtility.PluginList())
             {
                 btnPosition = btnPosition + 10;
 
-                _StandardIOPlugins.Add(item.Name, item);
+                PluginUtility._StandardIOPlugins.Add(item.Name, item);
 
 
                 for (int i = 0; i < item.position.Length; i++)
                 {
-                    //For toolbar
+                    //For Toolbar
                     ToolStripButton toolstripbtn = new ToolStripButton();
                     toolstripbtn.Text = item.Name;
                     toolstripbtn.Name = item.Name + btnPosition;
@@ -70,15 +88,16 @@ namespace bihongoCode
                     toolstripbtn.Image = ((Image)(resources.GetObject("toolStripButton1.Image")));
                     toolstripbtn.ImageTransparentColor = System.Drawing.Color.Magenta;
                     toolstripbtn.Size = new System.Drawing.Size(23, 22);
+                    //End Toolbar
 
 
-                    //for menu
-                    ToolStripMenuItem c = new ToolStripMenuItem();
-                    c.ForeColor = Color.Black;
-                    c.Text = item.Name;
-                    c.Name = item.Name + btnPosition;
-                    c.Click += c_Click;
-
+                    //For Menu Item
+                    ToolStripMenuItem menuItem = new ToolStripMenuItem();
+                    menuItem.ForeColor = Color.Black;
+                    menuItem.Text = item.Name;
+                    menuItem.Name = item.Name + btnPosition;
+                    menuItem.Click += menuItem_Click;
+                    //End Menu Item
 
                     //for (int i = 0; i < item.position.Length; i++)
                     //  {
@@ -87,22 +106,22 @@ namespace bihongoCode
                     switch (item.position[i])
                     {
                         case "File":
-                            fileToolStripMenuItem.DropDownItems.Add(c);
+                            fileToolStripMenuItem.DropDownItems.Add(menuItem);
                             break;
                         case "Edit":
-                            editToolStripMenuItem.DropDownItems.Add(c);
+                            editToolStripMenuItem.DropDownItems.Add(menuItem);
                             break;
                         case "Format":
-                            formatToolStripMenuItem.DropDownItems.Add(c);
+                            formatToolStripMenuItem.DropDownItems.Add(menuItem);
                             break;
                         case "Tools":
-                            toolsToolStripMenuItem.DropDownItems.Add(c);
+                            toolsToolStripMenuItem.DropDownItems.Add(menuItem);
                             break;
                         case "Settings":
-                            settingsToolStripMenuItem.DropDownItems.Add(c);
+                            settingsToolStripMenuItem.DropDownItems.Add(menuItem);
                             break;
                         case "Help":
-                            helpToolStripMenuItem.DropDownItems.Add(c);
+                            helpToolStripMenuItem.DropDownItems.Add(menuItem);
                             break;
                         case "Toolbar":
                             toolStrip1.Items.AddRange(new ToolStripItem[] { toolstripbtn });
@@ -115,7 +134,9 @@ namespace bihongoCode
                 }
             }
         }
-        //load plugin init Method
+        /// <summary>
+        /// load plugin init Method
+        /// </summary>
         public void loadInit()
         {
             //loading library for name
@@ -132,17 +153,19 @@ namespace bihongoCode
             }
             //ending
         }
-        //invoke plugin initPlugin Method
+        /// <summary>
+        /// Invoke plugin initPlugin Method
+        /// </summary>
         public void InitPlugin()
         {
             //  Button b = sender as Button;
 
             //....Dev Plugin...toolstrip code.
             string dkey = pluginName;
-            if (_StandardIOPlugins.ContainsKey(dkey))
+            if (PluginUtility._StandardIOPlugins.ContainsKey(dkey))
             {
 
-                StandardIO dplugin = _StandardIOPlugins[dkey];
+                StandardIO dplugin = PluginUtility._StandardIOPlugins[dkey];
                 //dplugin.Start();
 
                 dynamic devType = dplugin.GetType();
@@ -176,12 +199,18 @@ namespace bihongoCode
         }
 
 
+
         //library function
+        /// <summary>
+        /// Create new tab page
+        /// </summary>
         public void newpage(string name = "New Document")
         {
             TabPage tp = new TabPage(name);
             CCRichTextBoxXML rtb = new CCRichTextBoxXML();
 
+            rtb.HideSelection = false;
+            rtb.AcceptsTab = true;
             rtb.SelectionFont = new Font("Arial", 12, FontStyle.Bold);
             rtb.ContextMenuStrip = contexTab;
             rtb.ForeColor = (Color)Settings.Default["forecolor"];
@@ -206,7 +235,6 @@ namespace bihongoCode
             GetRichTextBox().TextChanged += new EventHandler(richTextBox1_TextChanged);
             GetRichTextBox().FontChanged += new EventHandler(richTextBox1_FontChanged);
         }
-
         void GetRichTextBox_DragDrop(object sender, DragEventArgs e)
         {
             string[] fileNames = e.Data.GetData(DataFormats.FileDrop) as string[];
@@ -221,7 +249,7 @@ namespace bihongoCode
                         newpage(fi.Name);
                         GetRichTextBox().AppendText(File.ReadAllText(name));
                         FileAddress = name;
-                        
+
                     }
                     catch (Exception ex)
                     {
@@ -231,7 +259,6 @@ namespace bihongoCode
             }
 
         }
-
         private void richTextBox1_SelectionChanged(object sender, EventArgs e)
         {
             Point pt = GetRichTextBox().GetPositionFromCharIndex(GetRichTextBox().SelectionStart);
@@ -240,7 +267,6 @@ namespace bihongoCode
                 AddLineNumbers();
             }
         }
-
         private void richTextBox1_VScroll(object sender, EventArgs e)
         {
             LineNumberTextBox.Text = "";
@@ -260,65 +286,59 @@ namespace bihongoCode
             GetRichTextBox().Select();
             AddLineNumbers();
         }
-
         private void Form1_Resize(object sender, EventArgs e)
         {
             AddLineNumbers();
         }
-
         private void LineNumberTextBox_MouseDown(object sender, MouseEventArgs e)
         {
             GetRichTextBox().Select();
             LineNumberTextBox.DeselectAll();
         }
-
-
         // end line numbers
-
         private void richTextBox1_KeyPress(object sender, KeyPressEventArgs e)
         {
             String s = e.KeyChar.ToString();
             int sel = GetRichTextBox().SelectionStart;
 
-           // if (checkBox1.Checked == true){
-                switch (s)
-                {
+            // if (checkBox1.Checked == true){
+            switch (s)
+            {
 
-                    case "(":
-                        GetRichTextBox().Text = GetRichTextBox().Text.Insert(sel, "()");
-                        e.Handled = true;
-                        GetRichTextBox().SelectionStart = sel + 1;
-                        break;
+                case "(":
+                    GetRichTextBox().Text = GetRichTextBox().Text.Insert(sel, "()");
+                    e.Handled = true;
+                    GetRichTextBox().SelectionStart = sel + 1;
+                    break;
 
-                    case "{":
-                        String t = "{}";
-                        GetRichTextBox().Text = GetRichTextBox().Text.Insert(sel, t);
-                        e.Handled = true;
-                        GetRichTextBox().SelectionStart = sel + t.Length - 1;
-                        isCurslyBracesKeyPressed = true;
-                        break;
+                case "{":
+                    String t = "{}";
+                    GetRichTextBox().Text = GetRichTextBox().Text.Insert(sel, t);
+                    e.Handled = true;
+                    GetRichTextBox().SelectionStart = sel + t.Length - 1;
+                    isCurslyBracesKeyPressed = true;
+                    break;
 
-                    case "<":
-                        GetRichTextBox().Text = GetRichTextBox().Text.Insert(sel, "<>");
-                        e.Handled = true;
-                        GetRichTextBox().SelectionStart = sel + 1;
-                        break;
+                case "<":
+                    GetRichTextBox().Text = GetRichTextBox().Text.Insert(sel, "<>");
+                    e.Handled = true;
+                    GetRichTextBox().SelectionStart = sel + 1;
+                    break;
 
-                    case "\"":
-                        GetRichTextBox().Text = GetRichTextBox().Text.Insert(sel, "\"\"");
-                        e.Handled = true;
-                        GetRichTextBox().SelectionStart = sel + 1;
-                        break;
+                case "\"":
+                    GetRichTextBox().Text = GetRichTextBox().Text.Insert(sel, "\"\"");
+                    e.Handled = true;
+                    GetRichTextBox().SelectionStart = sel + 1;
+                    break;
 
-                    case "'":
-                        GetRichTextBox().Text = GetRichTextBox().Text.Insert(sel, "''");
-                        e.Handled = true;
-                        GetRichTextBox().SelectionStart = sel + 1;
-                        break;
-                }
-           // }
+                case "'":
+                    GetRichTextBox().Text = GetRichTextBox().Text.Insert(sel, "''");
+                    e.Handled = true;
+                    GetRichTextBox().SelectionStart = sel + 1;
+                    break;
+            }
+            // }
         }
-
         private void richTextBox1_KeyDown(object sender, KeyEventArgs e)
         {
             int sel = GetRichTextBox().SelectionStart;
@@ -333,7 +353,6 @@ namespace bihongoCode
                 }
             }
         }
-
         public CCRichTextBoxXML GetRichTextBox()
         {
             //CCRichTextBox rtb = new CCRichTextBox();
@@ -349,22 +368,20 @@ namespace bihongoCode
 
             return rtb;
         }
+        /*  public RichTextBox GetRichTextBox()
+          {
+              RichTextBox rtb = null;
+              TabPage tp = tabControl1.SelectedTab;
 
-      /*  public RichTextBox GetRichTextBox()
-        {
-            RichTextBox rtb = null;
-            TabPage tp = tabControl1.SelectedTab;
 
+              if (tp != null)
+              {
+                  rtb = tp.Controls[0] as RichTextBox;
+              }
 
-            if (tp != null)
-            {
-                rtb = tp.Controls[0] as RichTextBox;
-            }
-
-            return rtb;
-        }*/
+              return rtb;
+          }*/
         //end library function
-
 
         //Code for Line Numbers
         public int getWidth()
@@ -416,7 +433,6 @@ namespace bihongoCode
         //End Code for LineNumbers
         #endregion
 
-
         public Form1()
         {
             InitializeComponent();
@@ -441,11 +457,14 @@ namespace bihongoCode
 
         private void Form1_Load(object sender, EventArgs e)
         {
+            //FileAssoc.SetAssociation(".ucs", "UCS_Editor_File", Application.ExecutablePath, "UCS File"); 
+
             //Create new tabpage with richtextbox
-            if(isArg == false){
+            if (isArg == false)
+            {
                 newpage();
             }
-            
+
             //GetRichTextBox().keywordUrl = "\\keywords\\c_sharp.xml";
             GetRichTextBox().Focus();
 
@@ -466,14 +485,14 @@ namespace bihongoCode
             int i = 0;
             foreach (var dir in dirs)
             {
-                i = i+30;
+                i = i + 30;
                 Button btn = new Button();
                 FileInfo fileInfo = new FileInfo(dir);
                 btn.Text = fileInfo.Name;
                 btn.ForeColor = Color.White;
-                btn.Location = new Point(10,i);
-                panel.Panel1.Controls.AddRange(new Button[]{ btn });
-               
+                btn.Location = new Point(10, i);
+                panel.Panel1.Controls.AddRange(new Button[] { btn });
+
             }
             //end loading
 
@@ -488,59 +507,93 @@ namespace bihongoCode
             loadInit();
         }
 
-        void toolstrip_Click(object sender, EventArgs e)
+
+        /// <summary>
+        /// Used for plugin event
+        /// </summary>
+        public void Plugin_Event(object sender, EventArgs e, PluginComponent component)
         {
-            //  Button b = sender as Button;
-
-            ToolStripButton toolstripbtn = sender as ToolStripButton;
-
-            if (toolstripbtn != null)
+            /**
+             * Toolstrip Section
+             */
+            if(component == PluginComponent.ToolStripButton)
             {
-
-                //....Dev Plugin...toolstrip code.
-                string dkey = toolstripbtn.Text.ToString();
-                if (_StandardIOPlugins.ContainsKey(dkey))
+                ToolStripButton toolstripbtn = sender as ToolStripButton;
+            
+                if (toolstripbtn != null)
                 {
+                    //....Dev Plugin...toolstrip code.
+                    string dkey = toolstripbtn.Text.ToString();
+                    Plugin_Common(dkey);
+                }
+                //End ToolStrip Section
+            }
+            else if (component == PluginComponent.ToolStripMenuItem)
+            {
+                ToolStripMenuItem toolstripbtn = sender as ToolStripMenuItem;
 
-                    string editorValue = GetRichTextBox().Text;
-                    
+                if (toolstripbtn != null)
+                {
+                    //....Dev Plugin...toolstrip code.
+                    string dkey = toolstripbtn.Text.ToString();
+                    Plugin_Common(dkey);
+                }
+                //End ToolStrip Section
+            }
 
-                    StandardIO dplugin = _StandardIOPlugins[dkey];
-                    //dplugin.Start();
 
-                    dynamic devType = dplugin.GetType();
-                    dynamic dev = Activator.CreateInstance(devType);
+        }
 
+        /// <summary>
+        /// Plugin Common Code
+        /// </summary>
+        public void Plugin_Common(string dkey)
+        {
+            if (PluginUtility._StandardIOPlugins.ContainsKey(dkey))
+            {
+                //get GetRichTextBox() value
+                string editorValue = GetRichTextBox().Text;
 
-                    dynamic property = devType.GetProperty("GetEditorText");
+                StandardIO dplugin = PluginUtility._StandardIOPlugins[dkey];
+                //dplugin.Start();
+
+                dynamic devType = dplugin.GetType();
+                dynamic dev = Activator.CreateInstance(devType);
+
+                dynamic property = devType.GetProperty("GetEditorText");
+                if(property != null){
                     property.SetValue(dev, editorValue);
+                }
+                
 
-                    dynamic eventProperty = devType.GetProperty("GetEditorText");
+                dynamic eventProperty = devType.GetProperty("GetEditorText");
+                if(eventProperty != null){
                     dynamic eventval = eventProperty.GetValue(dev);
+                }
+                
 
-                    //setting file extension
-                    dynamic extension = devType.GetProperty("FileExtension");
-                    if(extension != null){
-                        extension.SetValue(dev, FileExtension);
-                    }
-                    
+                //setting file extension
+                dynamic extension = devType.GetProperty("FileExtension");
+                if (extension != null)
+                {
+                    extension.SetValue(dev, FileExtension);
+                }
 
-                    //dynamic ext = extension.GetValue(dev);
-
-
-
-                    //setting file address
+                //dynamic ext = extension.GetValue(dev);
+                //setting file address
+                if (String.IsNullOrEmpty(FileAddress))
+                {
+                }
+                else
+                {
                     try
                     {
                         string getileurl = FileAddress.ToString();
                         dynamic fileurl = devType.GetProperty("FileAddress");
 
-                        if(fileurl != null){
-                            fileurl.SetValue(dev, getileurl);
-                        }
-                        else
+                        if (fileurl != null)
                         {
-                            MessageBox.Show("Save python file first");
+                            fileurl.SetValue(dev, getileurl);
                         }
                         //dynamic Getfileurl = fileurl.GetValue(dev);
                     }
@@ -548,43 +601,31 @@ namespace bihongoCode
                     {
                         MessageBox.Show(ex.Message);
                     }
-                    
-                    
-                    
-                    
-  
-
-                    dynamic methodStart = devType.GetMethod("Start");
-                    methodStart.Invoke(dev, new object[] { });
-
-                   //MessageBox.Show(eventval);
                 }
-                //...End dev...
 
 
+
+                dynamic methodStart = devType.GetMethod("Start");
+                methodStart.Invoke(dev, new object[] { });
+
+                //MessageBox.Show(eventval);
             }
         }
-
-        void c_Click(object sender, EventArgs e)
+        
+        /**
+         * ToolStrip Event Click
+         */
+        void toolstrip_Click(object sender, EventArgs e)
         {
-            //  Button b = sender as Button;
-            ToolStripMenuItem c = sender as ToolStripMenuItem;
+            Plugin_Event(sender, e, PluginComponent.ToolStripButton);
+        }
 
-            if (c != null)
-            {
-                //....Dev Plugin...toolstrip code.
-                string dkey = c.Text.ToString();
-                if (_StandardIOPlugins.ContainsKey(dkey))
-                {
-                    StandardIO dplugin = _StandardIOPlugins[dkey];
-                    dplugin.Start();
-
-
-                }
-                //...End dev...
-
-
-            }
+        /**
+         * MenuItem Event Clicks
+         */
+        void menuItem_Click(object sender, EventArgs e)
+        {
+            Plugin_Event(sender, e, PluginComponent.ToolStripMenuItem);
         }
 
         public static Boolean isCurslyBracesKeyPressed = false;
@@ -595,10 +636,11 @@ namespace bihongoCode
         {
             ToolStripMenuItem c = sender as ToolStripMenuItem;
 
-            if(c != null){
-                GetRichTextBox().keywordUrl = "\\keywords\\"+c.Text;
+            if (c != null)
+            {
+                GetRichTextBox().keywordUrl = "\\keywords\\" + c.Text;
             }
-            
+
         }
 
 
@@ -624,7 +666,8 @@ namespace bihongoCode
             else if (ext == ".js")
             {
                 GetRichTextBox().keywordUrl = "\\keywords\\javascript.xml";
-            }else if (ext == ".py")
+            }
+            else if (ext == ".py")
             {
                 GetRichTextBox().keywordUrl = "\\keywords\\python.xml";
             }
@@ -688,7 +731,7 @@ namespace bihongoCode
                     }
                     sw.Close();
                     s.Close();
-                    
+
                 }
             }
         }
@@ -904,7 +947,7 @@ namespace bihongoCode
 
         private void newKeywordsDictionaryToolStripMenuItem_Click(object sender, EventArgs e)
         {
- 
+
             FileInfo fileInfo = new FileInfo("keywords\\keywords.xml");
             string filetext = File.ReadAllText("keywords\\keywords.xml");
 
@@ -936,7 +979,15 @@ namespace bihongoCode
             go.Show();
         }
 
+
+        private void pluginListToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            new PluginListForm().Show();
+        }
+
         #endregion
+
+
 
 
 

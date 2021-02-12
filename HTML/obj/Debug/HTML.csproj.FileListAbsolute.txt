@@ -1,0 +1,7 @@
+E:\My Program\C#\bihongocode\HTML\bin\Debug\HTML.dll
+E:\My Program\C#\bihongocode\HTML\bin\Debug\HTML.pdb
+E:\My Program\C#\bihongocode\HTML\bin\Debug\bihongoPlugin.dll
+E:\My Program\C#\bihongocode\HTML\bin\Debug\bihongoPlugin.pdb
+E:\My Program\C#\bihongocode\HTML\obj\Debug\HTML.csprojResolveAssemblyReference.cache
+E:\My Program\C#\bihongocode\HTML\obj\Debug\HTML.dll
+E:\My Program\C#\bihongocode\HTML\obj\Debug\HTML.pdb

@@ -1,0 +1,7 @@
+E:\My Program\C#\bihongocode\packagemanager\bin\Debug\packagemanager.dll
+E:\My Program\C#\bihongocode\packagemanager\bin\Debug\packagemanager.pdb
+E:\My Program\C#\bihongocode\packagemanager\bin\Debug\bihongoPlugin.dll
+E:\My Program\C#\bihongocode\packagemanager\bin\Debug\bihongoPlugin.pdb
+E:\My Program\C#\bihongocode\packagemanager\obj\Debug\packagemanager.csprojResolveAssemblyReference.cache
+E:\My Program\C#\bihongocode\packagemanager\obj\Debug\packagemanager.dll
+E:\My Program\C#\bihongocode\packagemanager\obj\Debug\packagemanager.pdb
