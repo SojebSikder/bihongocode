@@ -507,7 +507,7 @@ namespace bihongoCode
             GetRichTextBox().Select();
             AddLineNumbers();
 
-            toolstatus.Text = "Ready";
+            
 
             //invoke plugin init method
             loadInit();
@@ -518,6 +518,31 @@ namespace bihongoCode
             KeywordWithExt.Add(".html", "html.xml");
             KeywordWithExt.Add(".js", "js.xml");
             KeywordWithExt.Add(".py", "py.xml");
+
+            toolstatus.Text = "Ready";
+            SetAfterExtChange();
+        }
+
+        /**
+         * After changing language do some task
+         */
+        public void SetAfterExtChange()
+        {
+            // Change lang status
+            string input = GetRichTextBox().keywordUrl;
+            if (input != null)
+            {
+                int index = input.IndexOf(".xml");
+                if (index > 0)
+                {
+                    input = input.Substring(0, index);
+                    toolStripStatusLang.Text = input;
+                }
+            }
+            else
+            {
+                toolStripStatusLang.Text = "";
+            }
         }
 
 
@@ -663,6 +688,7 @@ namespace bihongoCode
                 if (KeywordWithExt.ContainsKey(input))
                 {
                     GetRichTextBox().keywordUrl = KeywordWithExt[input].ToString();
+                    SetAfterExtChange();
                 }
                 
             }
@@ -681,6 +707,7 @@ namespace bihongoCode
 
             if(KeywordWithExt.ContainsKey(ext)){
                 GetRichTextBox().keywordUrl = KeywordWithExt[ext].ToString();
+                SetAfterExtChange();
             }
 
             
