@@ -152,18 +152,8 @@ namespace bihongoCode
                 {
                     pluginName = t.Name;
 
-                    //SetKeyWithExt();
                     InitPlugin();
-                    if(PluginUtility._StandardIOPlugins.ContainsKey(pluginName))
-                    {
-                        StandardIO item = PluginUtility._StandardIOPlugins[pluginName];
-                        if(PluginUtility.getPlugin_Property(item, "SetExt") != null){
-                            var ext = PluginUtility.getPlugin_Property(item, "SetExt");
-                            MessageBox.Show(ext);
-                        }
-                        
-                        
-                    }
+                    SetKeywordWithExt();
                     
                    
                 }
@@ -171,24 +161,33 @@ namespace bihongoCode
             //ending
         }
 
-        public void SetKeyWithExt()
+        /// <summary>
+        /// Set language specific syntax
+        /// </summary>
+        public void SetKeywordWithExt()
         {
-
-            string dkey = pluginName;
-            if (PluginUtility._StandardIOPlugins.ContainsKey(dkey))
+            if (PluginUtility._StandardIOPlugins.ContainsKey(pluginName))
             {
+                StandardIO item = PluginUtility._StandardIOPlugins[pluginName];
+                if (PluginUtility.getPlugin_Property(item, "SetExt") != null)
+                {
+                    var extProperty = PluginUtility.getPlugin_Property(item, "SetExt");
 
-                StandardIO dplugin = PluginUtility._StandardIOPlugins[dkey];
-                //dplugin.Start();
+                    //spliting string with separator
+                    char[] separatorExtSet = { '|' };
+                    string[] allExt = extProperty.Split(separatorExtSet, StringSplitOptions.RemoveEmptyEntries);
 
-                dynamic devType = dplugin.GetType();
-                dynamic dev = Activator.CreateInstance(devType);
+                    foreach (var ext in allExt)
+                    {
+                        char[] separatorExt = { '@' };
+                        string[] ExtSet = ext.Split(separatorExt, StringSplitOptions.RemoveEmptyEntries);
+                        KeywordWithExt.Add(ExtSet[0], ExtSet[1]);
+
+                    }
+
+                }
 
 
-                dynamic methodStart = devType.GetMethod("Test");
-                methodStart.Invoke(dev, new object[] { });
-
-                //MessageBox.Show(eventval);
             }
         }
         /// <summary>
