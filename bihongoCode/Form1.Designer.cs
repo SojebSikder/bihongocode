@@ -93,8 +93,8 @@
             this.printPreviewDialog1 = new System.Windows.Forms.PrintPreviewDialog();
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
             this.toolstatus = new System.Windows.Forms.ToolStripStatusLabel();
-            this.toolStrip1 = new System.Windows.Forms.ToolStrip();
             this.toolStripStatusLang = new System.Windows.Forms.ToolStripStatusLabel();
+            this.toolStrip1 = new System.Windows.Forms.ToolStrip();
             this.menuStrip.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.panel)).BeginInit();
             this.panel.Panel2.SuspendLayout();
@@ -504,6 +504,7 @@
             this.panel.SplitterDistance = 142;
             this.panel.SplitterWidth = 8;
             this.panel.TabIndex = 3;
+            this.panel.TabStop = false;
             // 
             // tabControl1
             // 
@@ -516,8 +517,10 @@
             this.tabControl1.Location = new System.Drawing.Point(-1, 0);
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
-            this.tabControl1.Size = new System.Drawing.Size(621, 496);
+            this.tabControl1.ShowToolTips = true;
+            this.tabControl1.Size = new System.Drawing.Size(617, 496);
             this.tabControl1.TabIndex = 1;
+            this.tabControl1.TabStop = false;
             // 
             // contextTabHeader
             // 
@@ -640,6 +643,12 @@
             this.toolstatus.Size = new System.Drawing.Size(59, 17);
             this.toolstatus.Text = "Loading...";
             // 
+            // toolStripStatusLang
+            // 
+            this.toolStripStatusLang.Name = "toolStripStatusLang";
+            this.toolStripStatusLang.Size = new System.Drawing.Size(30, 17);
+            this.toolStripStatusLang.Text = "lang";
+            // 
             // toolStrip1
             // 
             this.toolStrip1.BackColor = System.Drawing.SystemColors.ControlDarkDark;
@@ -650,12 +659,6 @@
             this.toolStrip1.Size = new System.Drawing.Size(771, 25);
             this.toolStrip1.TabIndex = 2;
             this.toolStrip1.Text = "toolStrip1";
-            // 
-            // toolStripStatusLang
-            // 
-            this.toolStripStatusLang.Name = "toolStripStatusLang";
-            this.toolStripStatusLang.Size = new System.Drawing.Size(30, 17);
-            this.toolStripStatusLang.Text = "lang";
             // 
             // Form1
             // 

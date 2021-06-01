@@ -26,6 +26,11 @@ namespace bihongoCode
 
         #region variables
 
+        /// <summary>
+        /// Controls
+        /// </summary>
+        TabPage tp;
+
         Color backColor = Color.FromArgb(40, 41, 35); //#282923 //0, 64, 128
         Color foreColor = Color.White;
 
@@ -243,7 +248,7 @@ namespace bihongoCode
         /// </summary>
         public void newpage(string name = "New Document")
         {
-            TabPage tp = new TabPage(name);
+            tp = new TabPage(name);
             CCRichTextBoxXML rtb = new CCRichTextBoxXML();
 
             rtb.HideSelection = false;
@@ -555,9 +560,9 @@ namespace bihongoCode
             SetAfterExtChange();
         }
 
-        /**
-         * After changing language do some task
-         */
+        /// <summary>
+        /// After changing language do some task
+        /// </summary>
         public void SetAfterExtChange()
         {
             // Change lang status
@@ -575,6 +580,14 @@ namespace bihongoCode
             {
                 toolStripStatusLang.Text = "";
             }
+        }
+
+        /// <summary>
+        /// Execute something after file saved
+        /// </summary>
+        public void ExecuteAfterFileSaved()
+        {
+
         }
 
 
@@ -793,7 +806,7 @@ namespace bihongoCode
 
         private void saveToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            if (FileAddress != null)
+         /*   if (FileAddress != null)
             {
                 using (Stream s = File.Open(FileAddress, FileMode.Create))
                 using (StreamWriter sw = new StreamWriter(s))
@@ -828,7 +841,9 @@ namespace bihongoCode
 
                 }
             }
+          * */
         }
+
 
         private void saveAsToolStripMenuItem_Click(object sender, EventArgs e)
         {
@@ -845,6 +860,11 @@ namespace bihongoCode
                     FileInfo fileInfo = new FileInfo(sfd.FileName);
                     FileExtension = fileInfo.Extension;
                     changeExt(FileExtension);
+
+                    // Set tab name
+                    tp.Text = fileInfo.Name;
+
+                    ExecuteAfterFileSaved();
                 }
             }
         }
