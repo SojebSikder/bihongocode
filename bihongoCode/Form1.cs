@@ -35,14 +35,14 @@ namespace bihongoCode
         Color foreColor = Color.White;
 
         //Info
-        System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
+        ComponentResourceManager resources = new ComponentResourceManager(typeof(Form1));
         //File Info
         public string FileAddress;
         public string FileExtension = ".txt";
         public string pluginName;
 
         // Add set of extension with keywords
-        public Dictionary<String, String> KeywordWithExt = new Dictionary<String, String>();
+        public Dictionary<string, string> KeywordWithExt = new Dictionary<string, string>();
 
         string paths = Environment.GetFolderPath(Environment.SpecialFolder.Desktop);
         bool isArg = false;
