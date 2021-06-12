@@ -57,9 +57,13 @@ namespace bihongoCode
             /// </summary>
             ToolStripButton,
             /// <summary>
-            /// Used for tollsript item
+            /// Used for toolstrip item
             /// </summary>
-            ToolStripMenuItem
+            ToolStripMenuItem,
+            /// <summary>
+            /// Used for top toolstrip
+            /// </summary>
+            TopToolStripMenu
         }
         #endregion
 
@@ -258,7 +262,23 @@ namespace bihongoCode
 
         public void TopMenuItem_click(object sender, EventArgs args)
         {
-            MessageBox.Show("Hello WOrld");
+
+            Plugin_Event(sender,args, PluginComponent.TopToolStripMenu);
+
+         /*       dynamic actionProperty = devType.GetProperty("command");
+                if (actionProperty != null)
+                {
+                    Dictionary<string, Action<string>> actionVal = actionProperty.GetValue(dev);
+                    foreach (var action in actionVal)
+                    {
+                        //action.Value.DynamicInvoke("");
+                        char[] separator = { ' ' };
+                        string[] actionArray = action.Key.Split(separator, StringSplitOptions.RemoveEmptyEntries);
+                        MessageBox.Show("Hello WOrld");
+                    }
+                } */
+            
+                
 
         }
         //end plugin helper method
@@ -661,6 +681,18 @@ namespace bihongoCode
                 }
                 //End ToolStrip Section
             }
+            else if (component == PluginComponent.TopToolStripMenu)
+            {
+                ToolStripMenuItem toolstripbtn = sender as ToolStripMenuItem;
+
+                if (toolstripbtn != null)
+                {
+                    //....Dev Plugin...toolstrip code.
+                    string dkey = toolstripbtn.Text.ToString();
+                    Plugin_Common(dkey);
+                }
+                //End ToolStrip Section
+            }
 
 
         }
@@ -728,6 +760,7 @@ namespace bihongoCode
 
                 dynamic methodStart = devType.GetMethod("Start");
                 methodStart.Invoke(dev, new object[] { });
+
 
                 // invoke custom method
                 dynamic actionProperty = devType.GetProperty("command");
