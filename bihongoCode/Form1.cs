@@ -235,8 +235,8 @@ namespace bihongoCode
                               
                                 topStripMenuItem.Name = "topToolStripMenuItem";
                                 //newToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.N)));
-                                newToolStripMenuItem.Text = actionArray[2];
-                                newToolStripMenuItem.Click += new EventHandler(this.newToolStripMenuItem_Click);
+                                topStripMenuItem.Text = actionArray[2];
+                                topStripMenuItem.Click += new EventHandler(TopMenuItem_click);
 
                                 menuStrip.Items.AddRange(new ToolStripItem[] {
                                     topStripMenuItem
@@ -253,6 +253,12 @@ namespace bihongoCode
             }
             //...End dev...
 
+
+        }
+
+        public void TopMenuItem_click(object sender, EventArgs args)
+        {
+            MessageBox.Show("Hello WOrld");
 
         }
         //end plugin helper method
