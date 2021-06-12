@@ -691,6 +691,20 @@ namespace bihongoCode
                 dynamic methodStart = devType.GetMethod("Start");
                 methodStart.Invoke(dev, new object[] { });
 
+                // invoke custom method
+                dynamic actionProperty = devType.GetProperty("command");
+                if (actionProperty != null)
+                {
+                    Dictionary <string, Action <string>> actionVal = actionProperty.GetValue(dev);
+                    foreach (var action in actionVal)
+                    {
+                       action.Value.DynamicInvoke("");
+                    }
+                    
+                    
+                }
+
+
                 //MessageBox.Show(eventval);
             }
         }

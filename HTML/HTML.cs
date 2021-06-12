@@ -75,11 +75,11 @@ namespace HTML
         }
         */
 
-        public Dictionary<string, Action<object, EventArgs>> command
+        public Dictionary<string, Action<string>> command
         {
             get
             {
-                return new Dictionary<string, Action<object, EventArgs>>()
+                return new Dictionary<string, Action<string>>()
                 {
                     { "create menu python", python },
 
@@ -90,7 +90,7 @@ namespace HTML
 
 
 
-        public static void python(object sender, EventArgs e)
+        public static void python(string sender = "null")
         {
             MessageBox.Show("Hello From Python");
             //return 0;
