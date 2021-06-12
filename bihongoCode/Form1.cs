@@ -217,6 +217,29 @@ namespace bihongoCode
                 dynamic methodStart = devType.GetMethod("Init");
                 methodStart.Invoke(dev, new object[] { });
 
+
+                dynamic actionProperty = devType.GetProperty("command");
+                if (actionProperty != null)
+                {
+                    Dictionary<string, Action<string>> actionVal = actionProperty.GetValue(dev);
+                    foreach (var action in actionVal)
+                    {
+                        //Console.WriteLine(action.Key);
+                        //action.Value.DynamicInvoke("");
+                        char[] separator = { ' '};
+                        string[] actionArray = action.Key.Split(separator, StringSplitOptions.RemoveEmptyEntries);
+                        //Console.WriteLine(actionArray[0]);
+                        if (actionArray[0] == "create")
+                        {
+                            if (actionArray[1] == "menu")
+                            {
+                                Console.WriteLine(actionArray[2]);
+                            }
+
+                        }
+                    }
+                }
+
                 //MessageBox.Show(eventval);
             }
             //...End dev...
@@ -700,8 +723,6 @@ namespace bihongoCode
                     {
                        action.Value.DynamicInvoke("");
                     }
-                    
-                    
                 }
 
 
