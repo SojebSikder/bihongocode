@@ -665,7 +665,7 @@ namespace bihongoCode
                 {
                     //....Dev Plugin...toolstrip code.
                     string dkey = toolstripbtn.Text.ToString();
-                    Plugin_Common(dkey);
+                    Plugin_Common(dkey, component);
                 }
                 //End ToolStrip Section
             }
@@ -677,7 +677,7 @@ namespace bihongoCode
                 {
                     //....Dev Plugin...toolstrip code.
                     string dkey = toolstripbtn.Text.ToString();
-                    Plugin_Common(dkey);
+                    Plugin_Common(dkey, component);
                 }
                 //End ToolStrip Section
             }
@@ -689,7 +689,7 @@ namespace bihongoCode
                 {
                     //....Dev Plugin...toolstrip code.
                     string dkey = toolstripbtn.Text.ToString();
-                    Plugin_Common(dkey);
+                    Plugin_Common(dkey, component);
                 }
                 //End ToolStrip Section
             }
@@ -700,7 +700,7 @@ namespace bihongoCode
         /// <summary>
         /// Plugin Common Code
         /// </summary>
-        public void Plugin_Common(string dkey)
+        public void Plugin_Common(string dkey, PluginComponent component)
         {
             if (PluginUtility._StandardIOPlugins.ContainsKey(dkey))
             {
@@ -756,23 +756,23 @@ namespace bihongoCode
                     }
                 }
 
-
-
-                dynamic methodStart = devType.GetMethod("Start");
-                methodStart.Invoke(dev, new object[] { });
-
-
-                // invoke custom method
-                dynamic actionProperty = devType.GetProperty("command");
-                if (actionProperty != null)
+                if (component == PluginComponent.TopToolStripMenu)
                 {
-                    Dictionary <string, Action <string>> actionVal = actionProperty.GetValue(dev);
-                    foreach (var action in actionVal)
+                    // invoke custom method
+                    dynamic actionProperty = devType.GetProperty("command");
+                    if (actionProperty != null)
                     {
-                       action.Value.DynamicInvoke("");
+                        Dictionary <string, Action <string>> actionVal = actionProperty.GetValue(dev);
+                        foreach (var action in actionVal)
+                        {
+                           action.Value.DynamicInvoke("");
+                        }
                     }
+                }else
+                {
+                    dynamic methodStart = devType.GetMethod("Start");
+                    methodStart.Invoke(dev, new object[] { });
                 }
-
 
                 //MessageBox.Show(eventval);
             }

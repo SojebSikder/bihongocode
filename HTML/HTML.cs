@@ -82,6 +82,7 @@ namespace HTML
                 return new Dictionary<string, Action<string>>()
                 {
                     { "create menu python", python },
+                    { "create menu csharp", csharp },
 
                 };
             }
@@ -93,7 +94,11 @@ namespace HTML
         public static void python(string sender = "null")
         {
             MessageBox.Show("Hello From Python");
-            //return 0;
+        }
+
+        public static void csharp(string sender = "null")
+        {
+            MessageBox.Show("Hello From csharp");
         }
 
 
