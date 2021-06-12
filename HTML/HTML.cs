@@ -49,6 +49,54 @@ namespace HTML
                 return ".css@css.xml|.jsx@jsx.xml";
             }
         }
+        /// <summary>
+        /// The control appears on File menu.
+        /// </summary>
+        public string[] position
+        {
+            get
+            {
+                return new string[]{
+                    MenuPosition.Toolbar.ToString(),
+                };
+            }
+        }
+
+        /*
+        public string[] command
+        {
+            get
+            {
+                return new string[]{
+                    "create menu python",
+                    "create menu HTML",
+                };
+            }
+        }
+        */
+
+        public Dictionary<string, Action<object, EventArgs>> command
+        {
+            get
+            {
+                return new Dictionary<string, Action<object, EventArgs>>()
+                {
+                    { "create menu python", python },
+
+                };
+            }
+
+        }
+
+
+
+        public static void python(object sender, EventArgs e)
+        {
+            MessageBox.Show("Hello From Python");
+            //return 0;
+        }
+
+
 
 
         //This method will be start first
@@ -56,6 +104,7 @@ namespace HTML
         {
            /* SetExt.Add(".css", "css.xml");
             SetExt.Add(".jsx", "jsx.xml"); */
+   
         }
 
         public void Start()
@@ -92,13 +141,6 @@ namespace HTML
         }
 
 
-        public string[] position
-        {
-            get {
-                return new string[]{
-                    MenuPosition.Toolbar.ToString()
-                };
-            }
-        }
+
     }
 }
