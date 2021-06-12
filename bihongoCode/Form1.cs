@@ -224,15 +224,24 @@ namespace bihongoCode
                     Dictionary<string, Action<string>> actionVal = actionProperty.GetValue(dev);
                     foreach (var action in actionVal)
                     {
-                        //Console.WriteLine(action.Key);
                         //action.Value.DynamicInvoke("");
                         char[] separator = { ' '};
                         string[] actionArray = action.Key.Split(separator, StringSplitOptions.RemoveEmptyEntries);
-                        //Console.WriteLine(actionArray[0]);
                         if (actionArray[0] == "create")
                         {
                             if (actionArray[1] == "menu")
                             {
+                                ToolStripMenuItem topStripMenuItem = new ToolStripMenuItem();
+                              
+                                topStripMenuItem.Name = "topToolStripMenuItem";
+                                //newToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.N)));
+                                newToolStripMenuItem.Text = actionArray[2];
+                                newToolStripMenuItem.Click += new EventHandler(this.newToolStripMenuItem_Click);
+
+                                menuStrip.Items.AddRange(new ToolStripItem[] {
+                                    topStripMenuItem
+
+                                });
                                 Console.WriteLine(actionArray[2]);
                             }
 
