@@ -262,23 +262,20 @@ namespace bihongoCode
 
         public void TopMenuItem_click(object sender, EventArgs args)
         {
-
             Plugin_Event(sender,args, PluginComponent.TopToolStripMenu);
 
-         /*       dynamic actionProperty = devType.GetProperty("command");
-                if (actionProperty != null)
-                {
-                    Dictionary<string, Action<string>> actionVal = actionProperty.GetValue(dev);
-                    foreach (var action in actionVal)
-                    {
-                        //action.Value.DynamicInvoke("");
-                        char[] separator = { ' ' };
-                        string[] actionArray = action.Key.Split(separator, StringSplitOptions.RemoveEmptyEntries);
-                        MessageBox.Show("Hello WOrld");
-                    }
-                } */
-            
-                
+            /*       dynamic actionProperty = devType.GetProperty("command");
+                   if (actionProperty != null)
+                   {
+                       Dictionary<string, Action<string>> actionVal = actionProperty.GetValue(dev);
+                       foreach (var action in actionVal)
+                       {
+                           //action.Value.DynamicInvoke("");
+                           char[] separator = { ' ' };
+                           string[] actionArray = action.Key.Split(separator, StringSplitOptions.RemoveEmptyEntries);
+                           MessageBox.Show("Hello WOrld");
+                       }
+                   } */
 
         }
         //end plugin helper method
