@@ -75,20 +75,20 @@ namespace HTML
         }
         */
 
-        public Dictionary<string, Action<string>> command
-        {
-            get
-            {
-                return new Dictionary<string, Action<string>>()
-                {
-                    { "create menu Python py", python },
-                    { "create menu C# csharp", csharp },
-                    { "create menu CMD bihongophp", bphp },
+        //public Dictionary<string, Action<string>> command
+        //{
+        //    get
+        //    {
+        //        return new Dictionary<string, Action<string>>()
+        //        {
+        //            { "create menu Python py", python },
+        //            { "create menu C# csharp", csharp },
+        //            { "create menu CMD bihongophp", bphp },
 
-                };
-            }
+        //        };
+        //    }
 
-        }
+        //}
 
 
 

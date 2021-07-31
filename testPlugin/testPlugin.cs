@@ -23,7 +23,7 @@ namespace testPlugin
             {
                 get
                 {
-                    return "Dev Plugin";
+                    return "Hello World";
                 }
             }
 
@@ -37,27 +37,6 @@ namespace testPlugin
                     };
                 }
             }
-
-            public string[] EventRegister
-            {
-                get
-                {
-                    return new string[] {
-                        "Do",
-                        "work"
-                    };
-                }
-            }
-
-            public void work()
-            {
-                MessageBox.Show(GetEditorText);
-            }
-            public void Do()
-            {
-                MessageBox.Show("im do");
-            }
-
 
 
             public void TextValue(string test)
@@ -79,7 +58,6 @@ namespace testPlugin
 
                     }
                 }
-
             }
              
 
@@ -95,7 +73,7 @@ namespace testPlugin
                 btn.Height = 23;
                 btn.Width = 100;
                 btn.Location = new Point(10, 10);
-                btn.Text = "Set Name";
+                btn.Text = "Click me";
                 btn.Name = Name;
                 btn.Font = new Font("Georgia", 9);
                 btn.Click += new EventHandler(btn_Click);
@@ -108,7 +86,7 @@ namespace testPlugin
 
             public void btn_Click(object sender, EventArgs e)
             {
-                MessageBox.Show("txt: " + GetEditorText, "title");
+                MessageBox.Show("Hello World", "title");
             }
 
             #endregion

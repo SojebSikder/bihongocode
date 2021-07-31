@@ -114,11 +114,9 @@ namespace packagemanager
         private void btnExe_Click(object sender, EventArgs e)
         {
             runCommand();
-
-            MessageBox.Show(FileAddress + "\\");
         }
 
-        
+
 
         private void txtInput_KeyUp(object sender, KeyEventArgs e)
         {
@@ -131,15 +129,27 @@ namespace packagemanager
 
         public void runCommand()
         {
-            if (File.Exists("lib\\bihongocmd\\phpcmd.exe"))
-            {
-                Process.Start("lib\\bihongocmd\\phpcmd.exe", FileAddress+"\\"+txtInput.Text);
-                txtInput.Text = "";
-            }
-            else
-            {
-                MessageBox.Show("Package Manager not found :)");
-            }
+
+            Process process = new Process();
+            ProcessStartInfo startInfo = new ProcessStartInfo();
+            startInfo.FileName = "cmd.exe";
+            startInfo.WorkingDirectory = @"C:\";
+            startInfo.Arguments = "/c "+ txtInput.Text;
+            process.StartInfo = startInfo;
+            process.Start();
+            process.WaitForExit();
+
+            txtInput.Text = "";
+
+            //if (File.Exists("lib\\bihongocmd\\phpcmd.exe"))
+            //{
+            //    Process.Start("lib\\bihongocmd\\phpcmd.exe", FileAddress+"\\"+txtInput.Text);
+            //    txtInput.Text = "";
+            //}
+            //else
+            //{
+            //    MessageBox.Show("Package Manager not found :)");
+            //}
         }
 
 
