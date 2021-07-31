@@ -240,6 +240,8 @@ namespace bihongoCode
                                 //newToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.N)));
                                 topStripMenuItem.Text = actionArray[2];
                                 topStripMenuItem.Name = actionArray[3];
+                                topStripMenuItem.Tag = pluginName;
+
                                 topStripMenuItem.Click += new EventHandler(TopMenuItem_click);
 
                                 menuStrip.Items.AddRange(new ToolStripItem[] {
@@ -262,15 +264,16 @@ namespace bihongoCode
 
         public void TopMenuItem_click(object sender, EventArgs args)
         {
-
+            // Custom menu created in plugin
             ToolStripMenuItem toolstripbtn = sender as ToolStripMenuItem;
             // custom method key
             string subdkey = toolstripbtn.Name.ToString();
 
 
-            string dkey = "HTML";
+            string dkey = toolstripbtn.Tag.ToString();
             if (PluginUtility._StandardIOPlugins.ContainsKey(dkey))
             {
+                string editorValue = GetRichTextBox().Text;
 
                 StandardIO dplugin = PluginUtility._StandardIOPlugins[dkey];
                 //dplugin.Start();
@@ -279,8 +282,51 @@ namespace bihongoCode
                 dynamic dev = Activator.CreateInstance(devType);
 
 
-                dynamic methodStart = devType.GetMethod("Init");
-                methodStart.Invoke(dev, new object[] { });
+                //dynamic methodStart = devType.GetMethod("Init");
+                //methodStart.Invoke(dev, new object[] { });
+
+                dynamic property = devType.GetProperty("GetEditorText");
+                if (property != null)
+                {
+                    property.SetValue(dev, editorValue);
+                }
+
+
+                dynamic eventProperty = devType.GetProperty("GetEditorText");
+                if (eventProperty != null)
+                {
+                    dynamic eventval = eventProperty.GetValue(dev);
+                }
+
+
+                //setting file extension
+                dynamic extension = devType.GetProperty("FileExtension");
+                if (extension != null)
+                {
+                    extension.SetValue(dev, FileExtension);
+                }
+
+                if (String.IsNullOrEmpty(FileAddress))
+                {
+                }
+                else
+                {
+                    try
+                    {
+                        string getileurl = FileAddress.ToString();
+                        dynamic fileurl = devType.GetProperty("FileAddress");
+
+                        if (fileurl != null)
+                        {
+                            fileurl.SetValue(dev, getileurl);
+                        }
+                        //dynamic Getfileurl = fileurl.GetValue(dev);
+                    }
+                    catch (Exception ex)
+                    {
+                        MessageBox.Show(ex.Message);
+                    }
+                }
 
 
                 dynamic actionProperty = devType.GetProperty("command");

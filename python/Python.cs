@@ -33,7 +33,8 @@ namespace python
         //Specify plugin position
         public string[] position
         {
-            get { 
+            get
+            {
                 return new string[]{
                     MenuPosition.Toolbar.ToString()
                 };
@@ -53,30 +54,57 @@ namespace python
             runPython(FileAddress);
         }
 
+        public Dictionary<string, Action<string>> command
+        {
+            get
+            {
+                return new Dictionary<string, Action<string>>()
+                {
+                    { "create menu RunPy rpy", run },
+                    { "create menu BuildPy bpy", buildPython },
+                };
+            }
+
+        }
+
         //functions
         public void runPython(string arg)
         {
-            if(arg != null){
+            if (arg != null)
+            {
                 Process.Start("python", arg);
             }
             else
             {
                 MessageBox.Show("Save Python file first");
             }
-            
+
         }
 
-        public void buildPython(string arg)
+        public void run(string sender = "null")
         {
+            string arg = FileAddress;
             if (arg != null)
             {
-                Process.Start("python -m compileall", arg);
+                Process.Start("python", arg);
             }
             else
             {
                 MessageBox.Show("Save Python file first");
             }
+        }
 
+        public void buildPython(string sender = "null")
+        {
+            string arg = FileAddress;
+            if (arg != null)
+            {
+                Process.Start("python", "-m compileall " + arg);
+            }
+            else
+            {
+                MessageBox.Show("Save Python file first");
+            }
         }
         //end functions
 
