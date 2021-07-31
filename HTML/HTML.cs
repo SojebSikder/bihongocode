@@ -83,6 +83,7 @@ namespace HTML
                 {
                     { "create menu python", python },
                     { "create menu csharp", csharp },
+                    { "create menu bihongophp", bphp },
 
                 };
             }
@@ -99,6 +100,11 @@ namespace HTML
         public static void csharp(string sender = "null")
         {
             MessageBox.Show("Hello From csharp");
+        }
+
+        public static void bphp(string sender = "null")
+        {
+            MessageBox.Show("Hello From bihongophp");
         }
 
 
