@@ -1,22 +1,21 @@
-﻿using bihongoCode.Properties;
+﻿using bihongoCode.library;
+using bihongoCode.Properties;
+using bihongoPlugin;
 using CodeCompletion_CSharp;
+using SimplePlugin;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Diagnostics;
 using System.Drawing;
 using System.IO;
 using System.Linq;
+using System.Reflection;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using bihongoPlugin;
-using SimplePlugin;
-
-using System.Diagnostics;
-using System.Threading;
-using System.Reflection;
-using bihongoCode.library;
 
 
 namespace bihongoCode
@@ -51,7 +50,7 @@ namespace bihongoCode
         /// Plugin event component
         /// </summary>
         public enum PluginComponent
-        {   
+        {
             /// <summary>
             /// Used for toolstrip
             /// </summary>
@@ -163,8 +162,8 @@ namespace bihongoCode
 
                     InitPlugin();
                     SetKeywordWithExt();
-                    
-                   
+
+
                 }
             }
             //ending
@@ -229,17 +228,18 @@ namespace bihongoCode
                     foreach (var action in actionVal)
                     {
                         //action.Value.DynamicInvoke("");
-                        char[] separator = { ' '};
+                        char[] separator = { ' ' };
                         string[] actionArray = action.Key.Split(separator, StringSplitOptions.RemoveEmptyEntries);
                         if (actionArray[0] == "create")
                         {
                             if (actionArray[1] == "menu")
                             {
                                 ToolStripMenuItem topStripMenuItem = new ToolStripMenuItem();
-                              
+
                                 topStripMenuItem.Name = "topToolStripMenuItem";
                                 //newToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.N)));
                                 topStripMenuItem.Text = actionArray[2];
+                                topStripMenuItem.Name = actionArray[3];
                                 topStripMenuItem.Click += new EventHandler(TopMenuItem_click);
 
                                 menuStrip.Items.AddRange(new ToolStripItem[] {
@@ -262,7 +262,62 @@ namespace bihongoCode
 
         public void TopMenuItem_click(object sender, EventArgs args)
         {
-            Plugin_Event(sender,args, PluginComponent.TopToolStripMenu);
+
+            ToolStripMenuItem toolstripbtn = sender as ToolStripMenuItem;
+            // custom method key
+            string subdkey = toolstripbtn.Name.ToString();
+
+
+            string dkey = "HTML";
+            if (PluginUtility._StandardIOPlugins.ContainsKey(dkey))
+            {
+
+                StandardIO dplugin = PluginUtility._StandardIOPlugins[dkey];
+                //dplugin.Start();
+
+                dynamic devType = dplugin.GetType();
+                dynamic dev = Activator.CreateInstance(devType);
+
+
+                dynamic methodStart = devType.GetMethod("Init");
+                methodStart.Invoke(dev, new object[] { });
+
+
+                dynamic actionProperty = devType.GetProperty("command");
+                if (actionProperty != null)
+                {
+                    Dictionary<string, Action<string>> actionVal = actionProperty.GetValue(dev);
+                    foreach (var action in actionVal)
+                    {
+                        //action.Value.DynamicInvoke("");
+                        char[] separator = { ' ' };
+                        string[] actionArray = action.Key.Split(separator, StringSplitOptions.RemoveEmptyEntries);
+                        if (actionArray[0] == "create")
+                        {
+                            if (actionArray[1] == "menu")
+                            {
+                                if (subdkey == actionArray[3])
+                                {
+                                    action.Value.DynamicInvoke("");
+                                    //MessageBox.Show(actionArray[3]);
+                                }
+
+                                
+                            }
+
+                        }
+                    }
+                }
+
+                //MessageBox.Show(eventval);
+            }
+
+
+
+
+
+
+            //Plugin_Event(sender,args, PluginComponent.TopToolStripMenu);
 
             /*       dynamic actionProperty = devType.GetProperty("command");
                    if (actionProperty != null)
@@ -599,7 +654,7 @@ namespace bihongoCode
             GetRichTextBox().Select();
             AddLineNumbers();
 
-            
+
 
             //invoke plugin init method
             loadInit();
@@ -654,10 +709,10 @@ namespace bihongoCode
             /**
              * Toolstrip Section
              */
-            if(component == PluginComponent.ToolStripButton)
+            if (component == PluginComponent.ToolStripButton)
             {
                 ToolStripButton toolstripbtn = sender as ToolStripButton;
-            
+
                 if (toolstripbtn != null)
                 {
                     //....Dev Plugin...toolstrip code.
@@ -685,7 +740,7 @@ namespace bihongoCode
                 if (toolstripbtn != null)
                 {
                     //....Dev Plugin...toolstrip code.
-                    string dkey = toolstripbtn.Text.ToString();
+                    string dkey = toolstripbtn.Name.ToString();
                     Plugin_Common(dkey, component);
                 }
                 //End ToolStrip Section
@@ -711,16 +766,18 @@ namespace bihongoCode
                 dynamic dev = Activator.CreateInstance(devType);
 
                 dynamic property = devType.GetProperty("GetEditorText");
-                if(property != null){
+                if (property != null)
+                {
                     property.SetValue(dev, editorValue);
                 }
-                
+
 
                 dynamic eventProperty = devType.GetProperty("GetEditorText");
-                if(eventProperty != null){
+                if (eventProperty != null)
+                {
                     dynamic eventval = eventProperty.GetValue(dev);
                 }
-                
+
 
                 //setting file extension
                 dynamic extension = devType.GetProperty("FileExtension");
@@ -753,19 +810,21 @@ namespace bihongoCode
                     }
                 }
 
+
                 if (component == PluginComponent.TopToolStripMenu)
                 {
                     // invoke custom method
                     dynamic actionProperty = devType.GetProperty("command");
                     if (actionProperty != null)
                     {
-                        Dictionary <string, Action <string>> actionVal = actionProperty.GetValue(dev);
+                        Dictionary<string, Action<string>> actionVal = actionProperty.GetValue(dev);
                         foreach (var action in actionVal)
                         {
-                           action.Value.DynamicInvoke("");
+                            action.Value.DynamicInvoke("");
                         }
                     }
-                }else
+                }
+                else
                 {
                     dynamic methodStart = devType.GetMethod("Start");
                     methodStart.Invoke(dev, new object[] { });
@@ -774,7 +833,7 @@ namespace bihongoCode
                 //MessageBox.Show(eventval);
             }
         }
-        
+
         /**
          * ToolStrip Event Click
          */
@@ -815,7 +874,7 @@ namespace bihongoCode
                     GetRichTextBox().keywordUrl = KeywordWithExt[input].ToString();
                     SetAfterExtChange();
                 }
-                
+
             }
 
         }
@@ -830,33 +889,34 @@ namespace bihongoCode
         public void changeExt(string ext)
         {
 
-            if(KeywordWithExt.ContainsKey(ext)){
+            if (KeywordWithExt.ContainsKey(ext))
+            {
                 GetRichTextBox().keywordUrl = KeywordWithExt[ext].ToString();
                 SetAfterExtChange();
             }
 
-            
-         /*   if (ext == ".php")
-            {
-                GetRichTextBox().keywordUrl = "\\keywords\\php.xml";
-            }
-            else if (ext == ".cs")
-            {
-                GetRichTextBox().keywordUrl = "\\keywords\\c_sharp.xml";
-            }
-            else if (ext == ".html")
-            {
-                GetRichTextBox().keywordUrl = "\\keywords\\html.xml";
-            }
-            else if (ext == ".js")
-            {
-                GetRichTextBox().keywordUrl = "\\keywords\\javascript.xml";
-            }
-            else if (ext == ".py")
-            {
-                GetRichTextBox().keywordUrl = "\\keywords\\python.xml";
-            } 
-          * */
+
+            /*   if (ext == ".php")
+               {
+                   GetRichTextBox().keywordUrl = "\\keywords\\php.xml";
+               }
+               else if (ext == ".cs")
+               {
+                   GetRichTextBox().keywordUrl = "\\keywords\\c_sharp.xml";
+               }
+               else if (ext == ".html")
+               {
+                   GetRichTextBox().keywordUrl = "\\keywords\\html.xml";
+               }
+               else if (ext == ".js")
+               {
+                   GetRichTextBox().keywordUrl = "\\keywords\\javascript.xml";
+               }
+               else if (ext == ".py")
+               {
+                   GetRichTextBox().keywordUrl = "\\keywords\\python.xml";
+               } 
+             * */
 
         }
 
@@ -886,42 +946,42 @@ namespace bihongoCode
 
         private void saveToolStripMenuItem_Click(object sender, EventArgs e)
         {
-         /*   if (FileAddress != null)
-            {
-                using (Stream s = File.Open(FileAddress, FileMode.Create))
-                using (StreamWriter sw = new StreamWriter(s))
-                {
-                    sw.Write(GetRichTextBox().Text);
+            /*   if (FileAddress != null)
+               {
+                   using (Stream s = File.Open(FileAddress, FileMode.Create))
+                   using (StreamWriter sw = new StreamWriter(s))
+                   {
+                       sw.Write(GetRichTextBox().Text);
 
-                    FileInfo fileInfo = new FileInfo(FileAddress);
-                    FileExtension = fileInfo.Extension;
-                    changeExt(FileExtension);
-                }
-            }
-            else
-            {
-                Stream s;
-                StreamWriter sw;
-                SaveFileDialog sfd = new SaveFileDialog();
-                sfd.Filter = "Text Files(*.txt)|*.txt|All Files(*.*)|*.*";
-                if (sfd.ShowDialog() == DialogResult.OK)
-                {
-                    using (s = File.Open(sfd.FileName, FileMode.Create))
-                    using (sw = new StreamWriter(s))
-                    {
-                        FileAddress = sfd.FileName;
-                        sw.Write(GetRichTextBox().Text);
+                       FileInfo fileInfo = new FileInfo(FileAddress);
+                       FileExtension = fileInfo.Extension;
+                       changeExt(FileExtension);
+                   }
+               }
+               else
+               {
+                   Stream s;
+                   StreamWriter sw;
+                   SaveFileDialog sfd = new SaveFileDialog();
+                   sfd.Filter = "Text Files(*.txt)|*.txt|All Files(*.*)|*.*";
+                   if (sfd.ShowDialog() == DialogResult.OK)
+                   {
+                       using (s = File.Open(sfd.FileName, FileMode.Create))
+                       using (sw = new StreamWriter(s))
+                       {
+                           FileAddress = sfd.FileName;
+                           sw.Write(GetRichTextBox().Text);
 
-                        FileInfo fileInfo = new FileInfo(sfd.FileName);
-                        FileExtension = fileInfo.Extension;
-                        changeExt(FileExtension);
-                    }
-                    sw.Close();
-                    s.Close();
+                           FileInfo fileInfo = new FileInfo(sfd.FileName);
+                           FileExtension = fileInfo.Extension;
+                           changeExt(FileExtension);
+                       }
+                       sw.Close();
+                       s.Close();
 
-                }
-            }
-          * */
+                   }
+               }
+             * */
         }
 
 

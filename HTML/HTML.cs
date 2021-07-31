@@ -81,9 +81,9 @@ namespace HTML
             {
                 return new Dictionary<string, Action<string>>()
                 {
-                    { "create menu python", python },
-                    { "create menu csharp", csharp },
-                    { "create menu bihongophp", bphp },
+                    { "create menu Python py", python },
+                    { "create menu C# csharp", csharp },
+                    { "create menu CMD bihongophp", bphp },
 
                 };
             }
