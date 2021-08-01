@@ -22,8 +22,6 @@ namespace python
         //Get Editor file extension
         public string FileExtension { get; set; }
 
-        public string tes { get; set; }
-
         //specify plugin name
         public string Name
         {
@@ -41,16 +39,14 @@ namespace python
             }
         }
 
-        //This method will be start first
+        //This method will be start first before window created
         public void Init()
         {
-            tes = "Hello i am working";
-            //MessageBox.Show("Initiated... "+tes);
+            //MessageBox.Show("Initiated... ");
         }
         //this is start when plugin will clicked
         public void Start()
         {
-            //MessageBox.Show(tes);
             runPython(FileAddress);
         }
 
@@ -60,6 +56,7 @@ namespace python
             {
                 return new Dictionary<string, Action<string>>()
                 {
+                    // syntex {"create menu <Label> <unique-name>", method}
                     { "create menu RunPy rpy", run },
                     { "create menu BuildPy bpy", buildPython },
                 };

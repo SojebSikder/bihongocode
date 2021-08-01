@@ -248,7 +248,7 @@ namespace bihongoCode
                                     topStripMenuItem
 
                                 });
-                                Console.WriteLine(actionArray[2]);
+                                //Console.WriteLine(actionArray[2]);
                             }
 
                         }
@@ -348,7 +348,7 @@ namespace bihongoCode
                                     //MessageBox.Show(actionArray[3]);
                                 }
 
-                                
+
                             }
 
                         }
