@@ -20,6 +20,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "pythonBuild", "pythonBuild\
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "packagemanager", "packagemanager\packagemanager.csproj", "{48825D86-BEB0-45A9-B374-B3E9F5D5BFCA}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "htmlcssjavascript", "htmlcssjavascript\htmlcssjavascript.csproj", "{DE895C72-01B4-41FA-8EC5-5F1AC0D6EA3F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "testTheme", "testTheme\testTheme.csproj", "{E9E417A1-54DF-4CEA-A490-BDC9CFF9293A}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -54,6 +58,14 @@ Global
 		{48825D86-BEB0-45A9-B374-B3E9F5D5BFCA}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{48825D86-BEB0-45A9-B374-B3E9F5D5BFCA}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{48825D86-BEB0-45A9-B374-B3E9F5D5BFCA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DE895C72-01B4-41FA-8EC5-5F1AC0D6EA3F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DE895C72-01B4-41FA-8EC5-5F1AC0D6EA3F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DE895C72-01B4-41FA-8EC5-5F1AC0D6EA3F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DE895C72-01B4-41FA-8EC5-5F1AC0D6EA3F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E9E417A1-54DF-4CEA-A490-BDC9CFF9293A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E9E417A1-54DF-4CEA-A490-BDC9CFF9293A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E9E417A1-54DF-4CEA-A490-BDC9CFF9293A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E9E417A1-54DF-4CEA-A490-BDC9CFF9293A}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
