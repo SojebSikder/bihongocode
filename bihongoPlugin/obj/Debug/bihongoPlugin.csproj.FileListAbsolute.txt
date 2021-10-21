@@ -2,3 +2,7 @@ E:\My Program\C#\bihongocode\bihongoPlugin\bin\Debug\bihongoPlugin.pdb
 E:\My Program\C#\bihongocode\bihongoPlugin\obj\Debug\bihongoPlugin.csprojResolveAssemblyReference.cache
 E:\My Program\C#\bihongocode\bihongoPlugin\obj\Debug\bihongoPlugin.dll
 E:\My Program\C#\bihongocode\bihongoPlugin\obj\Debug\bihongoPlugin.pdb
+D:\My Program\project\c#\bihongocode\bihongoPlugin\bin\Debug\bihongoPlugin.pdb
+D:\My Program\project\c#\bihongocode\bihongoPlugin\obj\Debug\bihongoPlugin.csprojResolveAssemblyReference.cache
+D:\My Program\project\c#\bihongocode\bihongoPlugin\obj\Debug\bihongoPlugin.dll
+D:\My Program\project\c#\bihongocode\bihongoPlugin\obj\Debug\bihongoPlugin.pdb

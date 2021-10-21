@@ -42,14 +42,14 @@
     </dependentAssembly>
   </dependency>
   <dependency>
-    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="bihongoCode.exe" size="144392">
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="bihongoCode.exe" size="143360">
       <assemblyIdentity name="bihongoCode" version="1.0.0.0" language="neutral" processorArchitecture="msil" />
       <hash>
         <dsig:Transforms>
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-        <dsig:DigestValue>uLDn9F9TKbYur1GMCL2Y9VKEwR7F3s9D1+DxCUoKMC0=</dsig:DigestValue>
+        <dsig:DigestValue>han0tlEZbtHyr8Bxp4Gm5inrH8Jpw0vDHogDAL1JaKo=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>
@@ -61,7 +61,7 @@
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-        <dsig:DigestValue>kgP/CYSUVYoRCHucjB+M+oDMGbusjXFjKh0Ji+gXdz0=</dsig:DigestValue>
+        <dsig:DigestValue>TFIIMctXY2HiGosUa60ATe7VYNzEEiqbxYYoOkzij8c=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>
